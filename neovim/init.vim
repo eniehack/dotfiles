@@ -102,5 +102,11 @@ set clipboard=unnamed
 
 colorscheme darkblue
 
-let g:python3_host_prog = 'C:\Python37\python.exe'
-let g:python_host_prog = 'C:\Python27\python.exe'
+if has('win32')
+	let g:python3_host_prog = 'C:\Python37\python.exe'
+	let g:python_host_prog = 'C:\Python27\python.exe'
+endif
+
+if has('unix')
+	let g:python3_host_prog = 'which python'
+	let g:python_host_prog = 'which python2'
