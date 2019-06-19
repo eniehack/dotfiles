@@ -1,0 +1,82 @@
+
+[[plugins]]
+repo = 'andviro/flake8-vim'
+on_ft = ['python']
+
+[[plugins]]
+repo = 'hynek/vim-python-pep8-indent'
+on_ft = ['python']
+
+[[plugins]]
+repo = 'ryanolsonx/vim-lsp-python'
+on_ft = ['python']
+on_i = 1
+hook_add = '''
+if executable('pyls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'whitelist': ['python'],
+        \ })
+endif
+'''
+[[plugins]]
+repo = 'ryanolsonx/vim-lsp-typescript'
+on_ft = ['typescript']
+on_i = 1
+hook_add = '''
+if executable('typescript-language-server')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'typescript-language-server',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+        \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
+        \ 'whitelist': ['typescript', 'typescript.tsx'],
+        \ })
+endif
+'''
+
+#[[plugins]]
+#repo = 'zchee/deoplete-jedi'
+#on_ft = ['python']
+#hook_add = '''
+#let g:deoplete#sources#jedi#python_path = 'C:\Python37\python.exe'
+#'''
+#on_i = 1
+
+#[[plugins]]
+#repo = 'davidhalter/jedi-vim'
+#on_ft = ['python']
+#hook_add = '''
+#leth g:jedi#force_py_version = 3
+#'''
+
+[[plugins]]
+repo = 'jmcantrell/vim-virtualenv'
+on_ft = ['python']
+
+[[plugins]]
+repo = 'zchee/deoplete-go'
+on_ft = ['go']
+on_i = 1
+hook_add = '''
+let g:deoplete#sources#go#gocode_binary = 'C:\Users\caffeine\go\bin\gocode.exe'
+let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
+'''
+
+[[plugins]]
+repo = 'fatih/vim-go'
+on_ft = ['go']
+hook_add = '''
+let g:go_bin_path = 'C:\Users\caffeine\go\bin\'
+'''
+
+[[plugins]]
+repo = 'lervag/vimtex'
+on_ft = ['tex']
+#hook_add = '''
+#let g:vimtex_compiler_latexmk_engines = { '_' : '-lualatex' }
+# call deoplete#custom#var('omni', 'input_patterns', {
+#          \ 'tex': g:vimtex#re#deoplete
+#          \})
+#'''
+
