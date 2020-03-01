@@ -67,16 +67,9 @@ let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const
 repo = 'fatih/vim-go'
 on_ft = ['go']
 hook_add = '''
-let g:go_bin_path = 'C:\Users\caffeine\go\bin\'
+if has('win32)
+    let g:go_bin_path = 'C:\Users\caffeine\go\bin\'
+elseif has('unix')
+    let g:go_bin_path = $HOME . '/go/bin/'
+endif
 '''
-
-[[plugins]]
-repo = 'lervag/vimtex'
-on_ft = ['tex']
-#hook_add = '''
-#let g:vimtex_compiler_latexmk_engines = { '_' : '-lualatex' }
-# call deoplete#custom#var('omni', 'input_patterns', {
-#          \ 'tex': g:vimtex#re#deoplete
-#          \})
-#'''
-
