@@ -97,6 +97,10 @@ set fenc=utf-8
 
 nnoremap sn gt
 nnoremap sp gT
+nnoremap sj <C-w>j
+nnoremap sk <C-w>k
+nnoremap sl <C-w>l
+nnoremap sh <C-w>h
 
 set clipboard=unnamed
 
