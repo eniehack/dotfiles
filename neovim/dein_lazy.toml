@@ -1,3 +1,62 @@
+[[plugins]]
+repo = 'prabirshrestha/async.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+hook_add = '''
+let g:lsp_async_completion = 1
+if executable('scry')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'scry',
+        \ 'cmd': {server_info->['scry', '--stdio']},
+        \ 'whitelist': ['crystal', 'ecrystal'],
+        \ })
+endif
+if executable('fsharp-language-server')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'fsharp-language-server',
+        \ 'cmd': {server_info->['fsharp-language-server']},
+        \ 'whitelist': ['fsharp'],
+        \ })
+endif
+if executable('elm-language-server')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'elm-language-server',
+        \ 'cmd': {server_info->['elm-language-server', '--stdio']},
+        \ 'whitelist': ['elm'],
+        \ })
+endif
+if executable('elixir-ls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'elixir-ls',
+        \ 'cmd': {server_info->['elixir-ls']},
+        \ 'whitelist': ['elixir'],
+        \ })
+endif
+if executable('taxlab')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'taxlab',
+        \ 'cmd': {server_info->['texlab']},
+        \ 'whitelist': ['tex', 'plaintex'],
+        \ })
+endif
+if executable('rust-analyzer')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'rust-analyzer',
+        \ 'cmd': {server_info->['rust-analyzer']},
+        \ 'whitelist': ['rust'],
+        \ })
+endif
+'''
+
+#[[plugins]]
+#repo = 'mattn/vim-lsp-settings'
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-lsp.vim'
 
 [[plugins]]
 repo = 'andviro/flake8-vim'
@@ -7,33 +66,33 @@ on_ft = ['python']
 repo = 'hynek/vim-python-pep8-indent'
 on_ft = ['python']
 
-[[plugins]]
-repo = 'ryanolsonx/vim-lsp-python'
-on_ft = ['python']
-on_i = 1
-hook_add = '''
-if executable('pyls')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'pyls',
-        \ 'cmd': {server_info->['pyls']},
-        \ 'whitelist': ['python'],
-        \ })
-endif
-'''
-[[plugins]]
-repo = 'ryanolsonx/vim-lsp-typescript'
-on_ft = ['typescript']
-on_i = 1
-hook_add = '''
-if executable('typescript-language-server')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'typescript-language-server',
-        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
-        \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
-        \ 'whitelist': ['typescript', 'typescript.tsx'],
-        \ })
-endif
-'''
+#[[plugins]]
+#repo = 'ryanolsonx/vim-lsp-python'
+#on_ft = ['python']
+#on_i = 1
+#hook_add = '''
+#if executable('pyls')
+#    au User lsp_setup call lsp#register_server({
+#        \ 'name': 'pyls',
+#        \ 'cmd': {server_info->['pyls']},
+#        \ 'whitelist': ['python'],
+#        \ })
+#endif
+#'''
+#[[plugins]]
+#repo = 'ryanolsonx/vim-lsp-typescript'
+#on_ft = ['typescript']
+#on_i = 1
+#hook_add = '''
+#if executable('typescript-language-server')
+#    au User lsp_setup call lsp#register_server({
+#        \ 'name': 'typescript-language-server',
+#        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+#        \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
+#        \ 'whitelist': ['typescript', 'typescript.tsx'],
+#        \ })
+#endif
+#'''
 
 #[[plugins]]
 #repo = 'zchee/deoplete-jedi'
@@ -54,14 +113,14 @@ endif
 repo = 'jmcantrell/vim-virtualenv'
 on_ft = ['python']
 
-[[plugins]]
-repo = 'zchee/deoplete-go'
-on_ft = ['go']
-on_i = 1
-hook_add = '''
-let g:deoplete#sources#go#gocode_binary = 'C:\Users\caffeine\go\bin\gocode.exe'
-let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
-'''
+#[[plugins]]
+#repo = 'zchee/deoplete-go'
+#on_ft = ['go']
+#on_i = 1
+#hook_add = '''
+#let g:deoplete#sources#go#gocode_binary = 'C:\Users\caffeine\go\bin\gocode.exe'
+#let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
+#'''
 
 [[plugins]]
 repo = 'fatih/vim-go'
@@ -73,3 +132,61 @@ elseif has('unix')
     let g:go_bin_path = $HOME . '/go/bin/'
 endif
 '''
+
+[[plugins]]
+repo = 'rhysd/vim-crystal'
+on_ft = ['crystal', 'ecrystal']
+
+#[[plugins]]
+#repo = 'fsharp/vim-fsharp'
+#on_ft = ['fsharp']
+[[plugins]]
+repo = 'adelarsq/neofsharp.vim'
+on_ft = ['fsharp']
+
+[[plugins]]
+repo = 'mattn/emmet-vim'
+on_ft = ['html', 'elm', 'gohtmltmpl', 'php']
+
+[[plugins]]
+repo = 'maxmellon/vim-jsx-pretty'
+on_ft = ['tsx', 'jsx']
+
+[[plugins]]
+repo = 'andys8/vim-elm-syntax'
+on_ft = ['elm']
+
+[[plugins]]
+repo = 'slim-template/vim-slim'
+on_ft = ['slim']
+
+[[plugins]]
+repo ='vimoutliner/vimoutliner'
+
+[[plugins]]
+repo = "jceb/vim-orgmode"
+on_ft = ["org"]
+
+[[plugins]]
+repo = "hsitz/vimorganizer"
+on_ft = ["org"]
+
+[[plugins]]
+repo = 'reasonml-editor/vim-reason-plus'
+on_ft = ['reason']
+
+[[plugins]]
+repo = 'tokorom/vim-review'
+on_ft = ['review']
+
+[[plugins]]
+repo = 'rust-lang/rust.vim'
+on_ft = ['rust']
+
+[[plugins]]
+repo = 'sudar/vim-arduino-syntax'
+on_ft = ['arduino']
+
+[[plugins]]
+repo = 'elixir-editors/vim-elixir'
+on_ft = ['eelixir', 'elixir']

@@ -102,9 +102,9 @@ nnoremap sk <C-w>k
 nnoremap sl <C-w>l
 nnoremap sh <C-w>h
 
-set clipboard=unnamed
+set clipboard+=unnamedplus
 
-colorscheme darkblue
+"colorscheme darkblue
 
 if has('win32')
 	let g:python3_host_prog = 'C:\Python37\python.exe'
@@ -112,6 +112,6 @@ if has('win32')
 endif
 
 if has('unix')
-	let g:python3_host_prog = 'which python'
-	let g:python_host_prog = 'which python2'
+	let g:python3_host_prog = '/sbin/python'
+	let g:python_host_prog = '/sbin/python2'
 endif

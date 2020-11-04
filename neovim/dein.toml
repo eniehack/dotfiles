@@ -5,67 +5,77 @@
 #let g:deoplete#enable_at_startup = 1
 #'''
 
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete.vim'
+
+#[[plugins]]
+#repo = 'w0rp/ale'
+#hook_add = '''
+#let g:ale_lint_on_save = 1
+#let g:ale_lint_on_text_changed = 'never'
+#let g:ale_linters = {
+#\	'go': ['golint']
+#\}
+#let g:ale_fix_on_save = 0
+#let g:ale_fix_on_text_changed = 'never'
+#let g:ale_fixers = {
+#\	'go': ['gofmt', 'goimports']
+#\}
+#let g:ale_set_loclist = 0
+#let g:ale_set_quickfix = 1
+#let g:ale_sign_column_always = 1
+#let g:ale_lint_on_enter = 0
+#let g:ale_open_list = 1
+#let g:ale_keep_list_window_open = 0
+#let b:ale_warn_about_trailing_whitespace = 0
+#" for go
+#let g:ale_linters.go ='gometalinter'
+#let g:ale_go_gometalinter_options = '--fast --enable=staticcheck --enable=gosimple --enable=unused'
+#"let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+#"let g:ale_sign_error = '⤫'
+#"let g:ale_sign_warning = '⚠'
+#'''
+
+#[[plugins]]
+#repo = 'tomasr/molokai'
+#hook_add = '''
+#let g:molokai_original = 1
+#'''
+
+#[[plugins]]
+#repo = 'NLKNguyen/papercolor-theme'
+#hook_add = '''
+#set background=dark
+#colorscheme PaperColor
+#'''
+
+#[[plugins]]
+#repo = 'morhetz/gruvbox'
+#hook_add = '''
+#set background=dark
+#autocmd vimenter * colorscheme gruvbox
+#'''
+
+#[[plugins]]
+#repo = 'altercation/vim-colors-solarized'
+#hook_add = '''
+#au MyAutoCmd VimEnter * nested colorscheme solarized
+#'''
 
 [[plugins]]
-repo = 'prabirshrestha/async.vim'
-
-[[plugins]]
-repo = 'prabirshrestha/vim-lsp'
+repo = 'joshdick/onedark.vim'
 hook_add = '''
-let g:lsp_async_completion = 1
-if executable('gopls')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'gopls',
-        \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
-        \ 'whitelist': ['go'],
-        \ })
-endif
-if executable('solargraph')
-    " gem install solargraph
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'solargraph',
-        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
-        \ 'initialization_options': {"diagnostics": "true"},
-        \ 'whitelist': ['ruby'],
-        \ })
-endif
+"let g:airline_theme = 'onedark'
+set background=dark
+"au MyAutoCmd VimEnter * nested colorscheme onedark
+colorscheme onedark
 '''
 
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete-lsp.vim'
-
-[[plugins]]
-repo = 'w0rp/ale'
-hook_add = '''
-let g:ale_lint_on_save = 1
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_linters = {
-\	'go': ['golint']
-\}
-let g:ale_fix_on_save = 0
-let g:ale_fix_on_text_changed = 'never'
-let g:ale_fixers = {
-\	'go': ['gofmt', 'goimports']
-\}
-let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 1
-let g:ale_sign_column_always = 1
-let g:ale_lint_on_enter = 0
-let g:ale_open_list = 1
-let g:ale_keep_list_window_open = 0
-let b:ale_warn_about_trailing_whitespace = 0
-" for go
-let g:ale_linters.go ='gometalinter'
-let g:ale_go_gometalinter_options = '--fast --enable=staticcheck --enable=gosimple --enable=unused'
-"let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
-"let g:ale_sign_error = '⤫'
-"let g:ale_sign_warning = '⚠'
-'''
-
-[[plugins]]
-repo = 'tomasr/molokai'
+#[[plugins]]
+#repo = 'sonph/onehalf'
+#hook_add = '''
+#set background=dark
+#"au MyAutoCmd VimEnter * nested colorscheme onehalfdark
+#colorscheme onehalfdark
+#'''
 
 [[plugins]]
 repo = 'majutsushi/tagbar'
@@ -84,7 +94,9 @@ let g:airline#extentions#tabline#enabled = 1
 repo = 'vim-airline/vim-airline-themes'
 depends = 'vim-airline'
 hook_add = '''
-let g:airline_theme = 'papercolor'
+"let g:airline_theme = 'papercolor'
+let g:airline_theme = 'onedark'
+"let g:airline_theme = 'gruvbox'
 '''
 
 [[plugins]]
@@ -93,16 +105,38 @@ hook_add = '''
 let g:SuperTabContextDefaultCompletionType = "context"
 let g:SuperTabDefaultCompletionType = "<c-n>"
 '''
-[[plugins]]
-repo = 'ctrlpvim/ctrlp.vim'
+#[[plugins]]
+#repo = 'ctrlpvim/ctrlp.vim'
+
+#[[plugins]]
+#repo = 'scrooloose/nerdtree'
+#hook_add = '''
+#nnoremap <silent><C-e> :NERDTreeToggle<CR>
+#'''
 
 [[plugins]]
-repo = 'scrooloose/nerdtree'
+repo = 'cocopon/vaffle.vim'
 hook_add = '''
-nnoremap <silent><C-e> :NERDTreeToggle<CR>
-nnoremap sj <C-w>j
-nnoremap sk <C-w>k
-nnoremap sl <C-w>l
-nnoremap sh <C-w>h
+nnoremap <silent><C-f> :Vaffle<CR>
 '''
+
+[[plugins]]
+repo = 'junegunn/fzf'
+build = './install --all'
+merged = 0
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+depends = 'fzf'
+
+[[plugins]]
+repo = "mattn/sonictemplate-vim"
+hook_add = '''
+let g:sonictemplate_vim_template_dir = [
+    \ '~/.config/nvim/sonictemplate'
+    \]
+'''
+
+[[plugins]]
+repo = 'editorconfig/editorconfig-vim'
 
