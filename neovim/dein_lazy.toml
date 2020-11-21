@@ -1,70 +1,75 @@
 [[plugins]]
-repo = 'prabirshrestha/async.vim'
-
-[[plugins]]
-repo = 'prabirshrestha/vim-lsp'
-hook_add = '''
-let g:lsp_async_completion = 1
-if executable('scry')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'scry',
-        \ 'cmd': {server_info->['scry', '--stdio']},
-        \ 'whitelist': ['crystal', 'ecrystal'],
-        \ })
-endif
-if executable('fsharp-language-server')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'fsharp-language-server',
-        \ 'cmd': {server_info->['fsharp-language-server']},
-        \ 'whitelist': ['fsharp'],
-        \ })
-endif
-if executable('elm-language-server')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'elm-language-server',
-        \ 'cmd': {server_info->['elm-language-server', '--stdio']},
-        \ 'whitelist': ['elm'],
-        \ })
-endif
-if executable('elixir-ls')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'elixir-ls',
-        \ 'cmd': {server_info->['elixir-ls']},
-        \ 'whitelist': ['elixir'],
-        \ })
-endif
-if executable('taxlab')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'taxlab',
-        \ 'cmd': {server_info->['texlab']},
-        \ 'whitelist': ['tex', 'plaintex'],
-        \ })
-endif
-if executable('rust-analyzer')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'rust-analyzer',
-        \ 'cmd': {server_info->['rust-analyzer']},
-        \ 'whitelist': ['rust'],
-        \ })
-endif
-'''
+repo = 'neoclide/coc.nvim'
+rev = 'release'
+on_i = 1
 
 #[[plugins]]
-#repo = 'mattn/vim-lsp-settings'
-
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete.vim'
-
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete-lsp.vim'
-
-[[plugins]]
-repo = 'andviro/flake8-vim'
-on_ft = ['python']
-
-[[plugins]]
-repo = 'hynek/vim-python-pep8-indent'
-on_ft = ['python']
+#repo = 'prabirshrestha/async.vim'
+#
+#[[plugins]]
+#repo = 'prabirshrestha/vim-lsp'
+#hook_add = '''
+#let g:lsp_async_completion = 1
+#if executable('scry')
+#    au User lsp_setup call lsp#register_server({
+#        \ 'name': 'scry',
+#        \ 'cmd': {server_info->['scry', '--stdio']},
+#        \ 'whitelist': ['crystal', 'ecrystal'],
+#        \ })
+#endif
+#if executable('fsharp-language-server')
+#    au User lsp_setup call lsp#register_server({
+#        \ 'name': 'fsharp-language-server',
+#        \ 'cmd': {server_info->['/home/eniehack/fsharp-language-server/out/FSharpLanguageServer']},
+#        \ 'whitelist': ['fsharp'],
+#        \ })
+#endif
+#if executable('elm-language-server')
+#    au User lsp_setup call lsp#register_server({
+#        \ 'name': 'elm-language-server',
+#        \ 'cmd': {server_info->['elm-language-server', '--stdio']},
+#        \ 'whitelist': ['elm'],
+#        \ })
+#endif
+#if executable('elixir-ls')
+#    au User lsp_setup call lsp#register_server({
+#        \ 'name': 'elixir-ls',
+#        \ 'cmd': {server_info->['elixir-ls']},
+#        \ 'whitelist': ['elixir'],
+#        \ })
+#endif
+#if executable('taxlab')
+#    au User lsp_setup call lsp#register_server({
+#        \ 'name': 'taxlab',
+#        \ 'cmd': {server_info->['texlab']},
+#        \ 'whitelist': ['tex', 'plaintex'],
+#        \ })
+#endif
+#if executable('rust-analyzer')
+#    au User lsp_setup call lsp#register_server({
+#        \ 'name': 'rust-analyzer',
+#        \ 'cmd': {server_info->['rust-analyzer']},
+#        \ 'whitelist': ['rust'],
+#        \ })
+#endif
+#if executable('solargraph')
+#    au User lsp_setup call lsp#register_server({
+#        \ 'name': 'solargraph',
+#        \ 'cmd': {server_info->['solargraph', 'stdio']},
+#        \ 'initialization_options': {"diagnostics": "true"},
+#        \ 'whitelist': ['ruby'],
+#        \ })
+#endif
+#'''
+#
+##[[plugins]]
+##repo = 'mattn/vim-lsp-settings'
+#
+#[[plugins]]
+#repo = 'prabirshrestha/asyncomplete.vim'
+#
+#[[plugins]]
+#repo = 'prabirshrestha/asyncomplete-lsp.vim'
 
 #[[plugins]]
 #repo = 'ryanolsonx/vim-lsp-python'
@@ -94,6 +99,13 @@ on_ft = ['python']
 #endif
 #'''
 
+[[plugins]]
+repo = 'andviro/flake8-vim'
+on_ft = ['python']
+
+[[plugins]]
+repo = 'hynek/vim-python-pep8-indent'
+on_ft = ['python']
 
 #[[plugins]]
 #repo = 'davidhalter/jedi-vim'
