@@ -1,0 +1,51 @@
+{
+    "languageserver": {
+        "scry": {
+            "command": "scry",
+            "args": ["--stdio"],
+            "filetypes": ["crystal", "ecrystal"],
+            "rootPatterns": ["shards.yml"]
+        },
+        "elixirLS": {
+            "command": "elixir-ls",
+            "filetypes": ["elixir", "eelixir"],
+            "rootPatterns": ["mix.exs"]
+        },
+        "elmLS": {
+            "command": "elm-language-server",
+            "filetypes": ["elm"],
+            "rootPatterns": ["elm.json"],
+            "initializationOptions": {
+                "elmPath": "elm", // optional
+                "elmFormatPath": "elm-format", // optional
+                "elmTestPath": "elm-test" // optional
+            }
+        },
+        "rust": {
+            "command": "rust-analyzer",
+            "filetypes": ["rust"],
+            "rootPatterns": ["Cargo.toml"]
+        },
+        "latex": {
+            "command": "texlab",
+            "ignoredRootPaths": ["~"],
+            "filetypes": ["tex", "bib", "plaintex", "context"]
+        },
+        "fsharp": {
+            "command" : "fsharp-language-server",
+            "filetypes": ["fsharp"]
+        },
+        "clangd": {
+            "command": "clangd",
+            "rootPatterns": ["compile_flags.txt", "compile_commands.json"],
+            "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"]
+        },
+        "golang": {
+            "command": "gopls",
+            "rootPatterns": ["go.mod"],
+            "disableWorkspaceFolders": true,
+            "filetypes": ["go"]
+        }
+    }
+}
+
