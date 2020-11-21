@@ -178,3 +178,20 @@ on_ft = ['eelixir', 'elixir']
 [[plugins]]
 repo = 'bsed/vim-dlang'
 on_ft = ['d']
+
+[[plugins]]
+repo = 'junegunn/fzf'
+build = './install --all'
+merged = 0
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+depends = 'fzf'
+
+[[plugins]]
+repo = "mattn/sonictemplate-vim"
+hook_add = '''
+let g:sonictemplate_vim_template_dir = [
+    \ '~/.config/nvim/sonictemplate'
+    \]
+'''
