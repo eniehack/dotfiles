@@ -63,12 +63,12 @@ let g:airline_theme = 'onedark'
 "let g:airline_theme = 'gruvbox'
 '''
 
-[[plugins]]
-repo = 'ervandew/supertab'
-hook_add = '''
-let g:SuperTabContextDefaultCompletionType = "context"
-let g:SuperTabDefaultCompletionType = "<c-n>"
-'''
+#[[plugins]]
+#repo = 'ervandew/supertab'
+#hook_add = '''
+#let g:SuperTabContextDefaultCompletionType = "context"
+#let g:SuperTabDefaultCompletionType = "<c-n>"
+#'''
 #[[plugins]]
 #repo = 'ctrlpvim/ctrlp.vim'
 
