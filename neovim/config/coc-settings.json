@@ -2,7 +2,7 @@
     "languageserver": {
         "scry": {
             "command": "scry",
-            "args": ["--stdio"],
+            //"args": ["--stdio"],
             "filetypes": ["crystal", "ecrystal"],
             "rootPatterns": ["shards.yml"]
         },
