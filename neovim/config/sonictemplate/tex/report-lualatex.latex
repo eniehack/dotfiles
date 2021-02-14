@@ -1,0 +1,7 @@
+\documentclass[a4j,lualatex,ja=standard]{bxjsarticle}
+\usepackage{longtable}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\begin{document}
+{{_cursor_}}
+\end{document}
