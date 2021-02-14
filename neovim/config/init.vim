@@ -115,3 +115,5 @@ if has('unix')
 	let g:python3_host_prog = '/sbin/python'
 	let g:python_host_prog = '/sbin/python2'
 endif
+
+let g:tex_flavor = "latex"
