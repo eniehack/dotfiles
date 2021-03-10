@@ -82,3 +82,21 @@
   "Major mode for TypeNovel")
 (add-to-list 'auto-mode-alist '("\\.tn$" . typenovel-mode))
 
+;; orgmode - LaTeX
+(with-eval-after-load 'ox-latex
+  (add-to-list 'org-latex-classes
+             '("report"
+                "\\documentclass[article,a4paper]{jlreq}
+[NO-PACKAGES]
+[NO-DEFAULT-PACKAGES]
+\\usepackage{amssymb,amsmath}
+\\usepackage{hyperref}
+\\usepackage{graphicx,color}"
+                ("\\section{%s}" . "\\section*{%s}")
+                ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
+(setq org-latex-compiler "lualatex")
+(setq org-latex-default-class "report")
+(setq org-latex-pdf-process '("cluttex -e lualatex %f"))
