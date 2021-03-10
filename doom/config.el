@@ -63,3 +63,22 @@
 (add-hook 'crystal-mode-hook 'eglot-ensure)
 (set-eglot-client! 'latex-mode '("texlab"))
 (add-hook 'latex-mode-hook 'eglot-ensure)
+
+(defvar typenovel-command "npx tnc")
+
+(defun typenovel-mode/typenovel-compile ()
+  (interactive)
+  (progn
+    (message "Compiling '%s'" buffer-file-name)
+    (async-shell-command (format "%s %s\n" typenovel-command buffer-file-name))))
+
+(define-generic-mode typenovel-mode
+  '("//" ("/*" . "*/"))
+  nil
+  '(("@[a-zA-Z]+[a-zA-Z0-9-_]*" . font-lock-keyword-face)
+    ("$[a-zA-Z]+[a-zA-Z0-9-_]*" . font-lock-variable-name-face))
+  nil
+  nil
+  "Major mode for TypeNovel")
+(add-to-list 'auto-mode-alist '("\\.tn$" . typenovel-mode))
+
