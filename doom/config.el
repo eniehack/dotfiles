@@ -61,3 +61,5 @@
 
 (set-eglot-client! 'crystal-mode '("scry"))
 (add-hook 'crystal-mode-hook 'eglot-ensure)
+(set-eglot-client! 'latex-mode '("texlab"))
+(add-hook 'latex-mode-hook 'eglot-ensure)
