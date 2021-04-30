@@ -1,0 +1,6 @@
+JISX0208_1983 = HackGen 17
+JISX0201_ROMAN = HackGen 17
+JISX0201_KATA = HackGen 17
+
+ISO8859_1 = HackGenNerd 17
+DEFAULT = HackGenNerd 17
