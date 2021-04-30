@@ -59,10 +59,12 @@
 (map! :nvi "C-S-k" #'+evil/window-move-up)
 (map! :nvi "C-S-l" #'+evil/window-move-right)
 
-(set-eglot-client! 'crystal-mode '("scry"))
-(add-hook 'crystal-mode-hook 'eglot-ensure)
-(set-eglot-client! 'latex-mode '("texlab"))
-(add-hook 'latex-mode-hook 'eglot-ensure)
+(after! 'eglot
+  (progn
+    (set-eglot-client! 'crystal-mode '("scry"))
+    (add-hook 'crystal-mode-hook 'eglot-ensure)
+    (set-eglot-client! 'latex-mode '("texlab"))
+    (add-hook 'latex-mode-hook 'eglot-ensure)))
 
 (defvar typenovel-command "npx tnc")
 
@@ -83,7 +85,7 @@
 (add-to-list 'auto-mode-alist '("\\.tn$" . typenovel-mode))
 
 ;; orgmode - LaTeX
-(with-eval-after-load 'ox-latex
+(after! 'ox-latex
   (add-to-list 'org-latex-classes
              '("report"
                 "\\documentclass[article,a4paper]{jlreq}
