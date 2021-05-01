@@ -26,22 +26,6 @@ if dein#load_state(s:dein_dir)
   call dein#load_toml(s:toml, {'lazy': 0})
   call dein#load_toml(s:lazy_toml, {'lazy': 1})
   
-  "call dein#add('Shougo/deoplete.nvim')
-  "call dein#add('scrooloose/nerdtree')
-
-  "python plugins
-  "call dein#add('zchee/deoplete-jedi')
-  "call dein#add('davidhalter/jedi-vim')
-  "call dein#add('jmcantrell/vim-virtualenv')
-
-  "Plugins for Go
-  "call dein#add('zchee/deoplete-go')
-  "call dein#add('benekastah/neomake')
-  "call dein#add('fatih/vim-go')
-
-  "call dein#add('ervandew/supertab')
-  "call dein#add('vim-airline/vim-airline')
-  
   call dein#end()
   "call dein#save_state()
 endif
@@ -117,3 +101,4 @@ if has('unix')
 endif
 
 let g:tex_flavor = "latex"
+

@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-set -euo
+set -eu
 
 SCRIPT_DIR=$(dirname "$0")
 XDG_CONFIG_HOME="$HOME"/.config
