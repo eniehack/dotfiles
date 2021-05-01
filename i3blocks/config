@@ -4,11 +4,11 @@
 
 [network]
 command=~/.config/i3blocks/network.sh
-interval=5
+interval=2
 interface=wlp1s0
 
 [volume]
-command=echo -e "\uf027 $(amixer -c 0 get Master | awk '/Mono: / {print $4 $6}' | sed -r "s/\[([0-9]+%)\]\[(\w+)\]/\1(\2)/g")"
+command=~/.config/i3blocks/volume.sh
 interval=3
 
 #[mpd]
@@ -20,5 +20,5 @@ command=~/.config/i3blocks/battery.sh
 interval=10
 
 [time]
-command=echo -e "\uf017 $(date +"%F %R %Z")"
+command=echo -e "\ue38a $(date +"%F %R %Z")"
 interval=20
