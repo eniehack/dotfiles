@@ -63,10 +63,10 @@
 ;; they are implemented.
 
 
-(map! :nvi "C-S-h" #'+evil/window-move-left)
-(map! :nvi "C-S-j" #'+evil/window-move-down)
-(map! :nvi "C-S-k" #'+evil/window-move-up)
-(map! :nvi "C-S-l" #'+evil/window-move-right)
+;;(map! :nvi "C-S-h" #'+evil/window-move-left)
+;;(map! :nvi "C-S-j" #'+evil/window-move-down)
+;;(map! :nvi "C-S-k" #'+evil/window-move-up)
+;;(map! :nvi "C-S-l" #'+evil/window-move-right)
 
 (after! 'eglot
   (progn
