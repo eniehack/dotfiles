@@ -107,7 +107,27 @@
                 ("\\subsection{%s}" . "\\subsection*{%s}")
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                  ("\\paragraph{%s}" . "\\paragraph*{%s}")
-                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
-(setq org-latex-compiler "lualatex")
-(setq org-latex-default-class "report")
-(setq org-latex-pdf-process '("cluttex -e lualatex %f"))
+                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+  (add-to-list 'org-latex-classes
+               '("lualatex-beamer"
+                 "\\documentclass[12pt,presentation]{beamer}
+[NO-DEFAULT-PACKAGES]
+\\usepackage{luatexja}
+\\usepackage[sourcehan-jp]{luatexja-preset}
+\\usepackage{textcomp}
+\\usepackage{graphicx}
+% \\usepackage{booktabs}
+\\usepackage{longtable}
+\\usepackage{wrapfig}
+\\usepackage{hyperref}
+\\hypersetup{pdfencoding=auto, linkbordercolor={0 1 0}}
+% \\usepackage{beamerthemeshadow}
+\\RequirePackage{fancyvrb}"
+                 ("\\section{%s}". "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
+  (defvar org-latex-compiler "lualatex")
+  (defvar org-latex-default-class "report")
+  (defvar org-latex-pdf-process '("cluttex -e lualatex %f"))
+  (defvar org-file-apps-gnu '(("pdf" . "llpp %s"))))
+
