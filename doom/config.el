@@ -29,7 +29,16 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/orgmodes/")
+(defvar org-directory "~/orgmodes/")
+(setq org-default-notes-file "notes.org")
+
+(after! org-capture
+  ;;(setq org-dir "~/orgmodes/")
+  (setq org-capture-templates
+      '(("n" "Note" entry (file+headline "~/orgmodes/notes.org" "Inbox")
+         "** %U %?\n")
+        ("t" "todo" entry (file+headline "~/orgmodes/todo.org" "Inbox")
+         "** TODO %T %??\n"))))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
