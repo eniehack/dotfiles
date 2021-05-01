@@ -18,3 +18,5 @@ setopt append_history
 setopt share_history
 bindkey '^P' history-beginning-search-backward
 bindkey '^N' history-beginning-search-forward
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

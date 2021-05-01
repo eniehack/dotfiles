@@ -25,4 +25,12 @@ export PATH="$PATH:$HOME/.emacs.d/bin"
 
 alias vimdiff="nvim -d"
 alias ec="emacsclient -t"
-export AUR_PAGER=nnn
+alias cp="cp -i"
+alias rm="rm -i"
+alias mv="mv -i"
+alias chicken-install="SUDO=doas chicken-install -s"
+alias chicken-uninstall="SUDO=doas chicken-uninstall -s"
+
+export AUR_PAGER=vifm
+#export TERM=xterm-256color
+#export TERM=rxvt-256color
