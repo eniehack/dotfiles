@@ -1,0 +1,5 @@
+PUSH_LOCAL_URL=syscmd(echo "$PUSH_LOCAL_URL")
+FETCH_LOCAL_URL=syscmd(echo "$FETCH_LOCAL_URL")
+REMOTE_URL=syscmd(echo "$REMOTE_URL")
+SIGN_KEY=syscmd(echo "$SIGN_KEY")
+ENCRYPT_KEY=syscmd(echo "$ENCRYPT_KEY")
