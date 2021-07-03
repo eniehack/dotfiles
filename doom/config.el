@@ -29,16 +29,35 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(defvar org-directory "~/orgmodes/")
+;; (require 'org-protocol)
+(setq org-directory "~/orgmodes/")
 (setq org-default-notes-file "notes.org")
+(defun transform-square=brackets-to-round-ones(string-to-transform)
+  ;; "transforms brackets into parentheses"
+  (concat
+   (mapcar #'(lambda (c) (if (equal c ?\[) ?\( (if (equal c ?\]) ?\) c))) string-to-transform)))
 
 (after! org-capture
   ;;(setq org-dir "~/orgmodes/")
   (setq org-capture-templates
-      '(("n" "Note" entry (file+headline "~/orgmodes/notes.org" "Inbox")
-         "** %U %?\n")
-        ("t" "todo" entry (file+headline "~/orgmodes/todo.org" "Inbox")
-         "** TODO %T %??\n"))))
+        '(("n" "Note" entry (file+headline "~/orgmodes/notes.org" "Inbox")
+           "** %U %?\n")
+          ("t" "todo" entry (file+headline "~/orgmodes/todo.org" "Inbox")
+           "** TODO %T %??\n")
+          ("l" "protocol with link" entry (file+headline "~/orgmodes/notes.org" "Inbox")
+           "* [[%:link][%(transform-square=brackets-to-round-ones \"%:description\")]]\n:PROPERTIES:\n:CREATED: %U\n:END:\n")
+          ("q" "protocol with quote" entry (file+headline "~/orgmodes/notes.org" "Inbox")
+           "* %:description\n:PROPERTIES:\n:CREATED: %U\n:END:\n#+BEGIN_QUOTE\n%i\n#+END_QUOTE\n[[%:link][%(transform-square=brackets-to-round-ones \"%:description\")]]\n%?"))))
+
+;; (after! org-protocol
+;;   (progn
+;;     (add-to-list 'org-capture-templates
+;;                  `(("l" "protocol with link" entry (file+headline ,(concat org-directory "notes.org") "Inbox")
+;;                     "* [[%:link][%:(transform-square=brackets-to-round-ones \"%:description\")]]\n:PROPERTIES:\n:CREATED: %U\n:END:\n")
+;;                    ))
+;;     (add-to-list 'org-capture-templates
+;;                  `(("q" "protocol with quote" entry (file+headline ,(concat org-directory "notes.org") "Inbox")
+;;                     "* %:description\n:PROPERTIES:\n:CREATED: %U\n:END:\n#+BEGIN_QUOTE\n%i\n#+END_QUOTE\n[[%:link][%:(transform-square=brackets-to-round-ones \"%:description\")]]\n%?")))))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.

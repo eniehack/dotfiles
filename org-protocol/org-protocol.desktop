@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=org-protocol
+Exec=/usr/bin/emacsclient %u
+#Exec=org-capture %u
+Icon=emacs-icon
+Type=Application
+Terminal=false
+Categories=System;
+MimeType=x-scheme-handler/org-protocol
