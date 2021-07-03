@@ -58,3 +58,6 @@
 ;; disable guile packages
 (disable-packages! flycheck-guile)
 
+(package! uim-leim
+  :recipe (:local-repo "/usr/share/emacs/site-lisp/uim-el"
+           :files ("uim-leim.el")))

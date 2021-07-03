@@ -150,3 +150,10 @@
   (defvar org-latex-pdf-process '("cluttex -e lualatex %f"))
   (defvar org-file-apps-gnu '(("pdf" . "llpp %s"))))
 
+(use-package! uim-leim
+  :config
+  (setq default-input-method "japanese-skk-uim")
+  (setq uim-lang-code-alist
+        (cons '("Japanese" "Japanese" utf-8 "UTF-8")
+              (delete (assoc "Japanese" uim-lang-code-alist)
+                      uim-lang-code-alist))))
