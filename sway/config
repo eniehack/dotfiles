@@ -14,23 +14,23 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term tilix
+set $term st -e /sbin/tmux
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu j4-dmenu-desktop --dmenu='bemenu -i --nb "#3f3f3f" --nf "#dcdccc" --fn "pango:Dejavu Sans Mono 12"' --term='alacritty'
+#set $menu j4-dmenu-desktop --dmenu='bemenu -i --nb "#3f3f3f" --nf "#dcdccc" --fn "pango:Dejavu Sans Mono 12"' --term='alacritty'
 set $menu wofi
 set $gnome-schema org.gnome.desktop.interface
 set $cursor-theme capitaine-cursors
 set $cursor-size 36
-set $gtk-theme 'Arc' 
+set $gtk-theme 'Arc'
 set $icon-theme 'breeze'
 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 #output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-output * bg ~/Downloads/kabegami_5cm3l.jpg fill
+output * bg ~/Downloads/kabegami_cos6l.jpg fill
 #
 # Example configuration:
 #
@@ -89,7 +89,7 @@ exec_always {
 ## ibus daemon
 #exec --no-startup-id "ibus-daemon -dr --panel /usr/lib/ibus/ibus-ui-gtk3"
 ## fcitx daemon
-#exec --no-startup-id "fcitx -rd"
+#exec --no-startup-id "fcitx5 -rd"
 ## uim daemon
 exec --no-startup-id "uim-xim"
 #exec --no-startup-ed "uim-tolbar-gtk3"
