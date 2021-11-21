@@ -3,7 +3,6 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
-
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Nakaya"
@@ -26,6 +25,10 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-nord)
+(setq doom-font (font-spec :family "HackGenNerd" :size 14)
+      doom-variable-pitch-font (font-spec :family "HackGenNerd")
+      doom-unicode-font (font-spec :family "HackGenNerd")
+      doom-big-font (font-spec :family "HackGenNerd" :size 22))
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -49,20 +52,17 @@
           ("q" "protocol with quote" entry (file+headline "~/orgmodes/notes.org" "Inbox")
            "* %:description\n:PROPERTIES:\n:CREATED: %U\n:END:\n#+BEGIN_QUOTE\n%i\n#+END_QUOTE\n[[%:link][%(transform-square=brackets-to-round-ones \"%:description\")]]\n%?"))))
 
-;; (after! org-protocol
-;;   (progn
-;;     (add-to-list 'org-capture-templates
-;;                  `(("l" "protocol with link" entry (file+headline ,(concat org-directory "notes.org") "Inbox")
-;;                     "* [[%:link][%:(transform-square=brackets-to-round-ones \"%:description\")]]\n:PROPERTIES:\n:CREATED: %U\n:END:\n")
-;;                    ))
-;;     (add-to-list 'org-capture-templates
-;;                  `(("q" "protocol with quote" entry (file+headline ,(concat org-directory "notes.org") "Inbox")
-;;                     "* %:description\n:PROPERTIES:\n:CREATED: %U\n:END:\n#+BEGIN_QUOTE\n%i\n#+END_QUOTE\n[[%:link][%:(transform-square=brackets-to-round-ones \"%:description\")]]\n%?")))))
+;; (use-package! org
+;;   :config
+;;   (undefine-key! 'motion "C-j"))
+
+(use-package! evil-org
+  :config
+  (undefine-key! 'insert evil-org-mode-map (kbd "C-j")))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
-
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
@@ -81,19 +81,27 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+(undefine-key! 'normal 'insert `motion "C-j")
 
-;;(map! :nvi "C-S-h" #'+evil/window-move-left)
-;;(map! :nvi "C-S-j" #'+evil/window-move-down)
-;;(map! :nvi "C-S-k" #'+evil/window-move-up)
-;;(map! :nvi "C-S-l" #'+evil/window-move-right)
+(when (eq system-type 'windows-nt)
+  (setq org-plantuml-jar-path
+        (expand-file-name (concat (getenv "HOME") "/scoop/apps/plantuml/1.2021.13/plantuml.jar")))
+  (setq set-clipboard-coding-system 'utf-16-le)
+  (let* ((msys-root "c:/msys64")
+         (msys-bin (concat msys-root "/usr/bin"))
+         (msys-ucrt-bin (concat msys-root "/ucrt64/bin")))
+    (setq exec-path (cons msys-ucrt-bin exec-path))
+    (setq exec-path (cons msys-bin exec-path))
 
-(after! 'eglot
-  (progn
-    (set-eglot-client! 'crystal-mode '("scry"))
-    (add-hook 'crystal-mode-hook 'eglot-ensure)
-    (set-eglot-client! 'latex-mode '("texlab"))
-    (add-hook 'latex-mode-hook 'eglot-ensure)))
+    (setq shell-file-name "bash")
+    (setenv "SHELL" shell-file-name)
+    (setq explicit-shell-file-name shell-file-name)
+    (setenv "PATH"
+            (concat msys-bin ";" msys-ucrt-bin ";" (getenv "PATH")))
+    (setq default-directory
+          (concat (getenv "HOME") "/"))))
 
+;; typenovel.el
 (defvar typenovel-command "npx tnc")
 
 (defun typenovel-mode/typenovel-compile ()
@@ -113,47 +121,73 @@
 (add-to-list 'auto-mode-alist '("\\.tn$" . typenovel-mode))
 
 ;; orgmode - LaTeX
-(after! 'ox-latex
-  (add-to-list 'org-latex-classes
-             '("report"
-                "\\documentclass[article,a4paper]{jlreq}
-[NO-PACKAGES]
+(after! ox-latex
+  (progn
+    (setq org-latex-compiler "lualatex")
+    (setq org-latex-default-class "jlreq")
+    (add-to-list 'org-latex-packages-alist '("" "graphicx"))
+    (add-to-list 'org-latex-packages-alist '("" "here"))
+    (add-to-list 'org-latex-classes
+                 '("jlreq"
+                   "\\documentclass{jlreq}
 [NO-DEFAULT-PACKAGES]
-\\usepackage{amssymb,amsmath}
-\\usepackage{hyperref}
-\\usepackage{graphicx,color}"
-                ("\\section{%s}" . "\\section*{%s}")
-                ("\\subsection{%s}" . "\\subsection*{%s}")
-                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
-                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-  (add-to-list 'org-latex-classes
-               '("lualatex-beamer"
-                 "\\documentclass[12pt,presentation]{beamer}
-[NO-DEFAULT-PACKAGES]
-\\usepackage{luatexja}
-\\usepackage[sourcehan-jp]{luatexja-preset}
-\\usepackage{textcomp}
-\\usepackage{graphicx}
-% \\usepackage{booktabs}
-\\usepackage{longtable}
-\\usepackage{wrapfig}
-\\usepackage{hyperref}
-\\hypersetup{pdfencoding=auto, linkbordercolor={0 1 0}}
-% \\usepackage{beamerthemeshadow}
-\\RequirePackage{fancyvrb}"
-                 ("\\section{%s}". "\\section*{%s}")
-                 ("\\subsection{%s}" . "\\subsection*{%s}")
-                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
-  (defvar org-latex-compiler "lualatex")
-  (defvar org-latex-default-class "report")
-  (defvar org-latex-pdf-process '("cluttex -e lualatex %f"))
-  (defvar org-file-apps-gnu '(("pdf" . "llpp %s"))))
+\\jlreqsetup{}"
+                   ("\\section{%s}" . "\\section*{%s}")
+                   ("\\subsection{%s}" . "\\subsection*{%s}")
+                   ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                   ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                   ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+    (defvar org-latex-pdf-process '("cluttex -e lualatex %f"))
+    (defvar org-file-apps-gnu '(("pdf" . "llpp %s")))))
 
 (use-package! uim-leim
+  :when (eq system-type 'gnu/linux)
   :config
   (setq default-input-method "japanese-skk-uim")
   (setq uim-lang-code-alist
         (cons '("Japanese" "Japanese" utf-8 "UTF-8")
               (delete (assoc "Japanese" uim-lang-code-alist)
                       uim-lang-code-alist))))
+
+(after! ddskk
+  :when (eq system-type 'windows-nt)
+  :config
+  (setq default-input-method "japanese-skk"))
+
+(after! elcord
+  (elcord-mode))
+
+(after! doom-modeline
+  (progn
+    (setq doom-modeline-continuous-word-count-modes
+;;          `(markdown-mode gfm-mode org-mode))
+          `(gfm-mode org-mode))
+    (setq doom-modeline-buffer-encoding t)
+    (setq doom-modeline-buffer-state-icon nil)
+    (setq doom-modeline-lsp t)
+    (setq doom-modeline-icon (display-graphic-p))))
+
+(use-package! vala-mode
+  :when (eq system-type 'windows-nt)
+  :config
+  (setq lsp-clients-vala-ls-executable "C:\\msys64\\ucrt64\\bin\\vala-language-server.exe"))
+
+(after! racer
+  :when (eq system-type 'windows-nt)
+  :config
+  (setq lsp-rust-server 'rls)
+  (setq lsp-rust-rls-server-command "C:\\msys64\\ucrt64\\bin\\rls.exe"))
+
+(after! ediff
+  :when (eq system-type `windows-nt)
+  :config
+  (let* ((msys-root "C:/msys64")
+         (msys-bin (concat msys-root "/usr/bin")))
+    (setq ediff-diff-program (concat msys-bin "/diff.exe"))
+    (setq ediff-diff3-program (concat msys-bin "/diff3.exe"))
+    (setq ediff-patch-program (concat msys-bin "/patch.exe")))
+  (setq ediff-diff-options "-w"))
+
+(when (eq system-type 'windows-nt)
+  (when (require `server nil t)
+    (server-start)))
