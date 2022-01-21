@@ -24,7 +24,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-nord)
+(setq doom-theme 'doom-dracula)
 (setq doom-font (font-spec :family "HackGenNerd" :size 14)
       doom-variable-pitch-font (font-spec :family "HackGenNerd")
       doom-unicode-font (font-spec :family "HackGenNerd")
@@ -84,22 +84,20 @@
 (undefine-key! 'normal 'insert `motion "C-j")
 
 (when (eq system-type 'windows-nt)
+  (let* ((msys2-root "c:/msys64")
+         (msys2-bin (concat msys2-root "/usr/bin"))
+         (msys2-ucrt-bin (concat msys2-root "/ucrt64/bin")))
+
+    (setq exec-path (nconc exec-path `(msys2-bin msys2-ucrt-bin)))
+    (setenv "PATH"
+            (concat msys2-bin ";" msys2-ucrt-bin ";" (getenv "PATH"))))
   (setq org-plantuml-jar-path
         (expand-file-name (concat (getenv "HOME") "/scoop/apps/plantuml/1.2021.13/plantuml.jar")))
-  (setq set-clipboard-coding-system 'utf-16-le)
-  (let* ((msys-root "c:/msys64")
-         (msys-bin (concat msys-root "/usr/bin"))
-         (msys-ucrt-bin (concat msys-root "/ucrt64/bin")))
-    (setq exec-path (cons msys-ucrt-bin exec-path))
-    (setq exec-path (cons msys-bin exec-path))
-
-    (setq shell-file-name "bash")
-    (setenv "SHELL" shell-file-name)
-    (setq explicit-shell-file-name shell-file-name)
-    (setenv "PATH"
-            (concat msys-bin ";" msys-ucrt-bin ";" (getenv "PATH")))
+  (set-clipboard-coding-system 'utf-16-le)
+  (set-default-coding-systems 'utf-8-unix)
+  (w32-set-system-coding-system 'utf-8-dos)
     (setq default-directory
-          (concat (getenv "HOME") "/"))))
+        (concat (getenv "HOME") "/")))
 
 ;; typenovel.el
 (defvar typenovel-command "npx tnc")
@@ -154,23 +152,22 @@
   :config
   (setq default-input-method "japanese-skk"))
 
-(after! elcord
-  (elcord-mode))
-
 (after! doom-modeline
   (progn
     (setq doom-modeline-continuous-word-count-modes
-;;          `(markdown-mode gfm-mode org-mode))
-          `(gfm-mode org-mode))
+          `(markdown-mode gfm-mode org-mode))
     (setq doom-modeline-buffer-encoding t)
     (setq doom-modeline-buffer-state-icon nil)
     (setq doom-modeline-lsp t)
     (setq doom-modeline-icon (display-graphic-p))))
 
-(use-package! vala-mode
+(after! vala-mode
   :when (eq system-type 'windows-nt)
   :config
   (setq lsp-clients-vala-ls-executable "C:\\msys64\\ucrt64\\bin\\vala-language-server.exe"))
+
+(use-package! meson-mode
+  :hook (meson-mode . company-mode))
 
 (after! racer
   :when (eq system-type 'windows-nt)
@@ -187,7 +184,3 @@
     (setq ediff-diff3-program (concat msys-bin "/diff3.exe"))
     (setq ediff-patch-program (concat msys-bin "/patch.exe")))
   (setq ediff-diff-options "-w"))
-
-(when (eq system-type 'windows-nt)
-  (when (require `server nil t)
-    (server-start)))

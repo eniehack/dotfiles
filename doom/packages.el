@@ -53,11 +53,20 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 
-;;(package! geiser-chicken)
 
 ;; disable guile packages
 (disable-packages! flycheck-guile)
+(package! elcord
+  :recipe (:host github :repo "Mstrodl/elcord"))
+  
+(package! vala-mode)
+(package! meson-mode)
 
-(package! uim-leim
-  :recipe (:local-repo "/usr/share/emacs/site-lisp/uim-el"
-           :files ("uim-leim.el")))
+(package! mips-mode)
+
+;;(package! uim-leim
+;;  :recipe (:local-repo "/usr/share/emacs/site-lisp/uim-el"
+;;           :files ("uim-leim.el")))
+
+(package! rnc-mode
+  :recipe (:host github :repo "TreeRex/rnc-mode"))
