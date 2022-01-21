@@ -3,10 +3,24 @@
 "runtime! setting/plug_setting.vim
 "runtime! setting/dein_setting.vim
 
-" dein settings {{{
 if &compatible
   set nocompatible
 endif
+
+let mapleader="\<SPACE>"
+
+let g:loaded_python_provider = 0
+"if has('win32')
+"	let g:python3_host_prog = system('scoop which python')
+"	let g:python_host_prog =  system('scoop which python2')
+"elseif has('unix')
+"	let g:python3_host_prog = system('which python')
+"	let g:python_host_prog = system('which python2')
+"endif
+
+let g:tex_flavor = 'latex'
+
+" dein settings {{{
 " dein.vimのディレクトリ
 let s:dein_dir = expand('~/.cache/dein')
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
@@ -39,6 +53,7 @@ if dein#check_install()
 endif
 " }}}
 
+
 filetype plugin indent on
 syntax on
 
@@ -46,7 +61,7 @@ set nowrap
 set nobackup
 set nowritebackup
 set backspace=indent,eol,start
-nnoremap <Space>l $
+nnoremap <leader>l $
 
 set hlsearch
 set ignorecase
@@ -87,18 +102,3 @@ nnoremap sl <C-w>l
 nnoremap sh <C-w>h
 
 set clipboard+=unnamedplus
-
-"colorscheme darkblue
-
-if has('win32')
-	let g:python3_host_prog = 'C:\Python37\python.exe'
-	let g:python_host_prog = 'C:\Python27\python.exe'
-endif
-
-if has('unix')
-	let g:python3_host_prog = '/sbin/python'
-	let g:python_host_prog = '/sbin/python2'
-endif
-
-let g:tex_flavor = "latex"
-

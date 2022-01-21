@@ -1,104 +1,89 @@
+# lsp settings {{{
 [[plugins]]
-repo = 'neoclide/coc.nvim'
-rev = 'release'
-on_i = 1
+repo = "neovim/nvim-lspconfig"
+on_event = "BufEnter"
+hook_source = """
+lua << EOF
+local nvim_lsp = require('lspconfig')
+local on_attach = function (client, bufnr)
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+  
+  local opts = { noremap=true, silent=true }
+    buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+    buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+    buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+    buf_set_keymap('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+    buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+    buf_set_keymap('n', 'gx', '<cmd>lua vim.lsp.diagnostic.show_linw_diagnostics()<CR>', opts)
+    buf_set_keymap('n', 'g[', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+    buf_set_keymap('n', 'g]', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+end
 
-#[[plugins]]
-#repo = 'prabirshrestha/async.vim'
-#
-#[[plugins]]
-#repo = 'prabirshrestha/vim-lsp'
-#hook_add = '''
-#let g:lsp_async_completion = 1
-#if executable('scry')
-#    au User lsp_setup call lsp#register_server({
-#        \ 'name': 'scry',
-#        \ 'cmd': {server_info->['scry', '--stdio']},
-#        \ 'whitelist': ['crystal', 'ecrystal'],
-#        \ })
-#endif
-#if executable('fsharp-language-server')
-#    au User lsp_setup call lsp#register_server({
-#        \ 'name': 'fsharp-language-server',
-#        \ 'cmd': {server_info->['/home/eniehack/fsharp-language-server/out/FSharpLanguageServer']},
-#        \ 'whitelist': ['fsharp'],
-#        \ })
-#endif
-#if executable('elm-language-server')
-#    au User lsp_setup call lsp#register_server({
-#        \ 'name': 'elm-language-server',
-#        \ 'cmd': {server_info->['elm-language-server', '--stdio']},
-#        \ 'whitelist': ['elm'],
-#        \ })
-#endif
-#if executable('elixir-ls')
-#    au User lsp_setup call lsp#register_server({
-#        \ 'name': 'elixir-ls',
-#        \ 'cmd': {server_info->['elixir-ls']},
-#        \ 'whitelist': ['elixir'],
-#        \ })
-#endif
-#if executable('taxlab')
-#    au User lsp_setup call lsp#register_server({
-#        \ 'name': 'taxlab',
-#        \ 'cmd': {server_info->['texlab']},
-#        \ 'whitelist': ['tex', 'plaintex'],
-#        \ })
-#endif
-#if executable('rust-analyzer')
-#    au User lsp_setup call lsp#register_server({
-#        \ 'name': 'rust-analyzer',
-#        \ 'cmd': {server_info->['rust-analyzer']},
-#        \ 'whitelist': ['rust'],
-#        \ })
-#endif
-#if executable('solargraph')
-#    au User lsp_setup call lsp#register_server({
-#        \ 'name': 'solargraph',
-#        \ 'cmd': {server_info->['solargraph', 'stdio']},
-#        \ 'initialization_options': {"diagnostics": "true"},
-#        \ 'whitelist': ['ruby'],
-#        \ })
-#endif
-#'''
-#
-##[[plugins]]
-##repo = 'mattn/vim-lsp-settings'
-#
-#[[plugins]]
-#repo = 'prabirshrestha/asyncomplete.vim'
-#
-#[[plugins]]
-#repo = 'prabirshrestha/asyncomplete-lsp.vim'
+nvim_lsp.texlab.setup{}
 
-#[[plugins]]
-#repo = 'ryanolsonx/vim-lsp-python'
-#on_ft = ['python']
-#on_i = 1
-#hook_add = '''
-#if executable('pyls')
-#    au User lsp_setup call lsp#register_server({
-#        \ 'name': 'pyls',
-#        \ 'cmd': {server_info->['pyls']},
-#        \ 'whitelist': ['python'],
-#        \ })
-#endif
-#'''
-#[[plugins]]
-#repo = 'ryanolsonx/vim-lsp-typescript'
-#on_ft = ['typescript']
-#on_i = 1
-#hook_add = '''
-#if executable('typescript-language-server')
-#    au User lsp_setup call lsp#register_server({
-#        \ 'name': 'typescript-language-server',
-#        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
-#        \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
-#        \ 'whitelist': ['typescript', 'typescript.tsx'],
-#        \ })
-#endif
-#'''
+local lsp_installer = require("nvim-lsp-installer")
+lsp_installer.on_server_ready(function(server)
+  local opts = {}
+  opts.on_attach = on_attach
+  server:setup(opts)
+  vim.cmd [[ do User LspAttachBuffers ]]
+end)
 
+EOF
+"""
+
+[[plugins]]
+repo = "williamboman/nvim-lsp-installer"
+on_source = "nvim-lspconfig"
+# }}}
+
+# ddc.vim {{{
+[[plugins]]
+repo = "Shougo/pum.vim"
+
+[[plugins]]
+repo = "vim-denops/denops.vim"
+
+[[plugin]]
+repo = "matsui54/denops-popup-preview.vim"
+on_source = "ddc.vim"
+hook_source = '''
+call popup_preview#enable()
+'''
+
+[[plugin]]
+repo = "matsui54/denops-signature_help"
+on_source = "ddc.vim"
+hook_source = '''
+call signature_help#enable()
+'''
+
+[[plugins]]
+repo = "Shougo/ddc-nvim-lsp"
+#depends = ["ddc.vim", "nvim-lspconfig"]
+on_source = "ddc.vim"
+
+[[plugin]]
+repo = "Shougo/ddc-converter_remove_overlap"
+on_source = "ddc.vim"
+
+[[plugin]]
+repo = "Shougo/ddc-sorter_rank"
+on_source = "ddc.vim"
+
+[[plugin]]
+repo = "Shougo/ddc-matcher_head"
+on_source = "ddc.vim"
+
+[[plugins]]
+repo = "Shougo/ddc-around"
+#depends = ["ddc.vim"]
+on_source = "ddc.vim"
+
+# }}}
+
+# python {{{
 [[plugins]]
 repo = 'andviro/flake8-vim'
 on_ft = ['python']
@@ -117,7 +102,9 @@ on_ft = ['python']
 [[plugins]]
 repo = 'jmcantrell/vim-virtualenv'
 on_ft = ['python']
+# }}}
 
+# golang{{{
 [[plugins]]
 repo = 'fatih/vim-go'
 on_ft = ['go']
@@ -127,18 +114,23 @@ if has('win32')
 elseif has('unix')
     let g:go_bin_path = $HOME . '/go/bin/'
 endif
-'''
+'''# }}}
 
+# Crystal{{{
 [[plugins]]
 repo = 'rhysd/vim-crystal'
 on_ft = ['crystal', 'ecrystal']
+# }}}
 
+# fsharp{{{
 #[[plugins]]
 #repo = 'fsharp/vim-fsharp'
 #on_ft = ['fsharp']
+
 [[plugins]]
 repo = 'adelarsq/neofsharp.vim'
 on_ft = ['fsharp']
+# }}}
 
 [[plugins]]
 repo = 'mattn/emmet-vim'
@@ -198,3 +190,4 @@ let g:sonictemplate_vim_template_dir = [
     \ '~/.config/nvim/sonictemplate'
     \]
 '''
+
