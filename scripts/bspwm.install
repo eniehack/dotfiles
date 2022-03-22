@@ -1,0 +1,18 @@
+
+
+DEST_DIR="${XDG_CONFIG_HOME}/bspwm"
+SRC_DIR="`script_dir`/.config/bspwm"
+
+install() {
+	mkdir -p "$DEST_DIR"
+  for file in "bspwmrc"; do
+  	ln -s "${SRC_DIR}/${file}" "${DEST_DIR}/"
+  done
+}
+
+uninstall() {
+  for file in "bspwmrc"; do
+  	rm "${DEST_DIR}/${file}"
+  done
+	rmdir "$DEST_DIR"
+}

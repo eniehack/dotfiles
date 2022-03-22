@@ -1,0 +1,16 @@
+DEST_DIR="${XDG_CONFIG_HOME}/picom"
+SRC_DIR="`script_dir`/.config/picom"
+
+install() {
+	mkdir -p "$DEST_DIR"
+  for file in "picom.conf"; do
+  	ln -s "${SRC_DIR}/${file}" "${DEST_DIR}/"
+  done
+}
+
+uninstall() {
+  for file in "picom.conf"; do
+  	rm "${DEST_DIR}/${file}"
+  done
+	rmdir "$DEST_DIR"
+}

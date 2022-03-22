@@ -1,0 +1,9 @@
+DEST_DIR="${HOME}/.doom.d"
+SRC_DIR="`script_dir`/.doom.d"
+
+install() {
+	mkdir -p "$DEST_DIR"
+	ln -s "${SRC_DIR}/init.el" "${DEST_DIR}/"
+	ln -s "${SRC_DIR}/config.el" "${DEST_DIR}/"
+	ln -s "${SRC_DIR}/package.el" "${DEST_DIR}/"
+}

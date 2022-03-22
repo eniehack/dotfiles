@@ -1,0 +1,9 @@
+DEST_DIR="${HOME}"
+SRC_DIR="`script_dir`"
+
+install() {
+	mkdir -p "$DEST_DIR"
+  for file in ".tmux.conf"; do
+	  ln -s "${SRC_DIR}/${file}" "${DEST_DIR}/"
+  done
+}
