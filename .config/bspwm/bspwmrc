@@ -1,7 +1,7 @@
 #! /bin/sh
 
 # load ICC profile
-pgrep -x xiccd > /dev/null || xiccd &
+#pgrep -x xiccd > /dev/null || xiccd &
 
 pgrep -x sxhkd > /dev/null || sxhkd &
 
@@ -14,15 +14,15 @@ bspc config split_ratio          0.52
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 
-pgrep -x feh > /dev/null || feh --bg-fill "$HOME/Downloads/kabegami_cos6l.jpg" --no-fehbg
+pgrep -x feh > /dev/null || feh --randomize --bg-fill "$HOME/wallpapers/*" --no-fehbg
 
 bspc rule -a Gimp desktop='^8' state=floating follow=on
 bspc rule -a Brave desktop='^2'
 bspc rule -a Firefox desktop='^2'
 bspc rule -a mplayer2 state=floating
 bspc rule -a feh state=floating
-bspc rule -a Kupfer.py focus=on
-bspc rule -a Screenkey manage=off
+#bspc rule -a Kupfer.py focus=on
+#bspc rule -a Screenkey manage=off
 
 # load compositor
 pgrep -x picom > /dev/null || picom &
@@ -33,4 +33,5 @@ pgrep -x picom > /dev/null || picom &
 pgrep -x uim-xim > /dev/null || uim-xim &
 pgrep -x uim-toolbar-gtk3-systray > /dev/null || uim-toolbar-gtk3-systray &
 # start notification daemon
-pgrep -x lxqt-notificationd > /dev/null || lxqt-notificationd &
+#pgrep -x lxqt-notificationd > /dev/null || lxqt-notificationd &
+pgrep -x /usr/lib/xfce4/notifyd/xfce4-notifyd > /dev/null || /usr/lib/xfce4/notifyd/xfce4-notifyd &

@@ -15,7 +15,7 @@ export PATH="$PATH:$GOPATH/bin"
 #export PATH="$PATH:$HOME/scry/bin"
 
 # Ruby
-export PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
+#export PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 
 # Android SDK
 export _JAVA_AWT_WM_NONREPARENTING=1

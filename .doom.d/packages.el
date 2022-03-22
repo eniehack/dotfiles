@@ -59,14 +59,14 @@
 (package! elcord
   :recipe (:host github :repo "Mstrodl/elcord"))
   
-(package! vala-mode)
-(package! meson-mode)
+;;(package! vala-mode)
+;;(package! meson-mode)
 
-(package! mips-mode)
+;;(package! mips-mode)
 
-;;(package! uim-leim
-;;  :recipe (:local-repo "/usr/share/emacs/site-lisp/uim-el"
-;;           :files ("uim-leim.el")))
+(package! uim-leim
+  :recipe (:local-repo "/usr/share/emacs/site-lisp/uim-el"
+           :files ("uim-leim.el")))
 
 (package! rnc-mode
   :recipe (:host github :repo "TreeRex/rnc-mode"))

@@ -61,11 +61,10 @@ nnoremap <leader>gc :Git commit<CR>
 
 [[plugins]]
 repo = 'vim-airline/vim-airline'
-depends = ['tagbar', 'vim-fugitive']
-depends = 'vim-airline-themes'
+depends = ['tagbar', 'vim-fugitive', 'vim-airline-themes', 'dracula.nvim']
 hook_source = '''
 let g:airline#extentions#tabline#enabled = 1
-let g:airline_theme = 'dracula'
+let g:airline_theme = 'base16_dracula'
 '''
 
 [[plugins]]
