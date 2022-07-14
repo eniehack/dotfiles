@@ -52,14 +52,6 @@
           ("q" "protocol with quote" entry (file+headline "~/orgmodes/notes.org" "Inbox")
            "* %:description\n:PROPERTIES:\n:CREATED: %U\n:END:\n#+BEGIN_QUOTE\n%i\n#+END_QUOTE\n[[%:link][%(transform-square=brackets-to-round-ones \"%:description\")]]\n%?"))))
 
-;; (use-package! org
-;;   :config
-;;   (undefine-key! 'motion "C-j"))
-
-(use-package! evil-org
-  :config
-  (undefine-key! 'insert evil-org-mode-map (kbd "C-j")))
-
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
@@ -80,8 +72,6 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
-
-(undefine-key! 'normal 'insert `motion "C-j")
 
 (when (eq system-type 'windows-nt)
   (let* ((msys2-root "c:/msys64")
@@ -138,19 +128,27 @@
     (defvar org-latex-pdf-process '("cluttex -e lualatex %f"))
     (defvar org-file-apps-gnu '(("pdf" . "llpp %s")))))
 
-(use-package! uim-leim
-  :when (eq system-type 'gnu/linux)
-  :config
-  (setq default-input-method "japanese-skk-uim")
-  (setq uim-lang-code-alist
-        (cons '("Japanese" "Japanese" utf-8 "UTF-8")
-              (delete (assoc "Japanese" uim-lang-code-alist)
-                      uim-lang-code-alist))))
+;; (use-package! uim-leim
+;;   :when (eq system-type 'gnu/linux)
+;;   :config
+;;   (setq default-input-method "japanese-skk-uim")
+;;   (setq uim-lang-code-alist
+;;         (cons '("Japanese" "Japanese" utf-8 "UTF-8")
+;;               (delete (assoc "Japanese" uim-lang-code-alist)
+;;                       uim-lang-code-alist))))
 
 (after! ddskk
-  :when (eq system-type 'windows-nt)
-  :config
-  (setq default-input-method "japanese-skk"))
+  (progn
+    (setq default-input-method "japanese-skk")
+    (map! :map global-map "C-x C-j" #'skk-mode)
+    (defun ddskk-anastasis-hooks ()
+      "ddskk"
+      (map! (:after org-mode :map org-mode-map
+             :i "C-j" nil)
+            (:after evil-org :map evil-org-mode-map
+             :i "C-j" nil)
+            (:i "C-j" #'skk-kakutei)))
+    (add-hook 'skk-mode-hook 'ddskk-anastasis-hooks)))
 
 (after! doom-modeline
   (progn
@@ -184,3 +182,17 @@
     (setq ediff-diff3-program (concat msys-bin "/diff3.exe"))
     (setq ediff-patch-program (concat msys-bin "/patch.exe")))
   (setq ediff-diff-options "-w"))
+
+(after! lsp-mode
+  (progn
+    (add-to-list 'lsp-language-id-configuration
+                 '(crystal-mode . "crystal"))
+    (lsp-register-client
+     (make-lsp-client :new-connection
+                      (lsp-stdio-connection '("crystalline"))
+                      :activation-fn (lsp-activate-on "crystal")
+                      :priority '1
+                      :server-id `crystalline))))
+
+(after! org-alert
+  (add-hook 'org-agenda-mode-hook 'org-alert-enable))
