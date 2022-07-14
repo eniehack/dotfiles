@@ -1,0 +1,13 @@
+DEST_DIR="${XDG_CONFIG_HOME}/i3"
+SRC_DIR="`script_dir`/.config/i3"
+DEIN_DEST_DIR="${HOME}"
+
+install() {
+	mkdir -p "${DEST_DIR}"
+	ln -s "${SRC_DIR}/config" "${DEST_DIR}/"
+}
+
+uninstall() {
+	rm "${DEST_DIR}/config"
+	rmdir "${DEST_DIR}"
+}

@@ -5,5 +5,12 @@ install() {
 	mkdir -p "$DEST_DIR"
 	ln -s "${SRC_DIR}/init.el" "${DEST_DIR}/"
 	ln -s "${SRC_DIR}/config.el" "${DEST_DIR}/"
-	ln -s "${SRC_DIR}/package.el" "${DEST_DIR}/"
+	ln -s "${SRC_DIR}/packages.el" "${DEST_DIR}/"
+}
+
+uninstall() {
+	unlink "${DEST_DIR}/init.el"
+	unlink "${DEST_DIR}/config.el"
+	unlink "${DEST_DIR}/packages.el" 
+	rmdir "$DEST_DIR"
 }

@@ -1,0 +1,16 @@
+DEST_DIR="${XDG_CONFIG_HOME}/rofi"
+SRC_DIR="`script_dir`/.config/rofi"
+
+install() {
+	mkdir -p "$DEST_DIR"
+  for file in "config.rasi"; do
+  	ln -s "${SRC_DIR}/${file}" "${DEST_DIR}/"
+  done
+}
+
+uninstall() {
+  for file in "config.rasi"; do
+  	rm "${DEST_DIR}/${file}"
+  done
+	rmdir "$DEST_DIR"
+}

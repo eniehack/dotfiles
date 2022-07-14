@@ -1,0 +1,8 @@
+DEST_DIR="${XDG_DATA_HOME:-~/.local/share}/applications"
+SRC_DIR="`script_dir`/xdg_data_home/applications"
+
+install() {
+	mkdir -p "$DEST_DIR"
+  ln -s "${SRC_DIR}/org-protocol.desktop" "${DEST_DIR}/"
+  update-desktop-database ~/.local/share/applications/
+}
