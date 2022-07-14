@@ -32,3 +32,15 @@ autoload -Uz _zi
 (( ${+_comps} )) && _comps[zi]=_zi
 # examples here -> https://z-shell.pages.dev/docs/gallery/collection
 zicompinit # <- https://z-shell.pages.dev/docs/gallery/collection#minimal
+
+export PNPM_HOME="/home/eniehack/.local/share/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+
+#if [ -f "$HOME/.gpg-agent-info" ]; then
+#    source "$HOME/.gpg-agent-info"
+#    export GPG_AGENT_INFO
+#    export SSH_AUTH_SOCK
+#    export SSH_AGENT_PID
+#else
+#    eval $(gpg-agent --daemon --write-env-file "$HOME/.gpg-agent-info")
+#fi
