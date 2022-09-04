@@ -1,0 +1,9 @@
+#!/bin/sh
+
+emacs=$(which emacs)
+if [ -x "$emacs" ]; then
+    pgrep -x "$emacs" || "$emacs" --fg-daemon > /dev/null &
+else
+    echo "no file to execute emacs" >&2
+    exit 1
+fi
