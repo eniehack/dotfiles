@@ -1,0 +1,5 @@
+configuration {
+  modi: "window,drun,emoji,combi";
+  font: "HackGenNerd 13";
+  combi-modi: "window,drun,emoji";
+}
