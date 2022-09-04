@@ -9,6 +9,6 @@ do sleep 1
 done
 
 # Launch Polybar, using default config location ~/.config/polybar/config
-polybar $1 &
+polybar &
 
 echo "Polybar launched..."
