@@ -44,3 +44,4 @@ export PATH="$PNPM_HOME:$PATH"
 #else
 #    eval $(gpg-agent --daemon --write-env-file "$HOME/.gpg-agent-info")
 #fi
+source /usr/share/nvm/init-nvm.sh

@@ -1,4 +1,5 @@
 export EDITOR="$(which nvim)"
+export LANG="ja_JP.UTF-8"
 #XDG Base Directory settings
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
@@ -22,6 +23,9 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 
 # Doom Emacs
 export PATH="$PATH:$HOME/.emacs.d/bin"
+
+# local package
+export PATH="$PATH:$HOME/.local/bin"
 
 alias vimdiff="nvim -d"
 alias ec="emacsclient -t"
