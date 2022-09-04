@@ -124,4 +124,17 @@ super + {Left,Down,Up,Right}
 Print
 	maim -s -u | xclip -selection clipboard -t image/png
 
+# Audio Contorol through pulseaudio
+XF86AudioLowerVolume
+	pactl set-sink-volume @DEFAULT_SINK@ -5%
+
+XF86AudioRaiseVolume
+	pactl set-sink-volume @DEFAULT_SINK@ +5%
+
+XF86AudioMute
+	pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+XF86MonBrightness{Up,Down}
+  xbacklight {-inc 5,-dec 5}
+
 # vim: ts=2 :
