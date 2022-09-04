@@ -24,13 +24,13 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 export PATH="$PATH:$HOME/.emacs.d/bin"
 
 alias vimdiff="nvim -d"
-alias ec="emacsclient -t --with-x-toolkit=lucid"
+alias ec="emacsclient -t"
 alias cp="cp -i"
 alias rm="rm -i"
 alias mv="mv -i"
 alias chicken-install="SUDO=doas chicken-install -s"
 alias chicken-uninstall="SUDO=doas chicken-uninstall -s"
-alias emcc="emacsclient -nc --with-x-toolkit=lucid"
+alias emcc="emacsclient -nc"
 
 export AUR_PAGER=vifm
 #export TERM=xterm-256color
