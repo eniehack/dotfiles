@@ -273,7 +273,7 @@ input_method = uim
 
 # auto_restart = true
 
-# allow_osc52 = false
+allow_osc52 = true
 
 # use_local_echo = false
 
