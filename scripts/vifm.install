@@ -1,0 +1,13 @@
+DEST_DIR="${XDG_CONFIG_HOME}/vifm"
+SRC_DIR="`script_dir`/.config/vifm"
+DEIN_DEST_DIR="${HOME}"
+
+install() {
+	mkdir -p "${DEST_DIR}"
+	ln -s "${SRC_DIR}/vifmrc" "${DEST_DIR}/"
+}
+
+uninstall() {
+	rm "${DEST_DIR}/vifmrc"
+	rmdir "${DEST_DIR}"
+}
