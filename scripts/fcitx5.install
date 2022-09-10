@@ -1,0 +1,18 @@
+#!/bin/sh
+DEST_DIR="${HOME}/.local/share/fcitx5"
+SRC_DIR="`script_dir`/local/share/fcitx5"
+
+install() {
+	mkdir -p "$DEST_DIR/addon"
+	mkdir -p "$DEST_DIR/lua/vi-cooperative"
+  for file in "addon/vi-cooperative.conf" "lua/vi-cooperative/main.lua"; do
+  	ln -s "${SRC_DIR}/${file}" "${DEST_DIR}/${file}"
+  done
+}
+
+uninstall() {
+  for file in "addon/vi-cooperative.conf" "lua/vi-cooperative/main.lua"; do
+  	unlink "${DEST_DIR}/${file}"
+  done
+	rmdir "$DEST_DIR"
+}
