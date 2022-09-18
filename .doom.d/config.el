@@ -25,14 +25,18 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-dracula)
-(setq doom-font (font-spec :family "HackGenNerd" :size 14)
-      doom-variable-pitch-font (font-spec :family "HackGenNerd")
-      doom-unicode-font (font-spec :family "HackGenNerd")
-      doom-big-font (font-spec :family "HackGenNerd" :size 22))
+(setq doom-font (font-spec :family "HackGenConsoleNF" :size 14)
+      doom-variable-pitch-font (font-spec :family "HackGenConsoleNF")
+      doom-unicode-font (font-spec :family "HackGenConsoleNF")
+      doom-big-font (font-spec :family "HackGenConsoleNF" :size 22))
 
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
-;; (require 'org-protocol)
+(if-let ((dir (getenv "XDG_RUNTIME_DIR")))
+    (setq server-socket-dir (file-name-concat dir "emacs"))
+  (setq server-socket-dir (locate-user-emacs-file "")))
+
+  ;; If you use `org' and don't want your org files in the default location below,
+  ;; change `org-directory'. It must be set before org loads!
+  ;; (require 'org-protocol)
 (setq org-directory "~/orgmodes/")
 (setq org-default-notes-file "notes.org")
 (defun transform-square=brackets-to-round-ones(string-to-transform)
