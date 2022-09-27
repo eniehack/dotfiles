@@ -74,3 +74,4 @@
   :recipe (:host github :repo "TreeRex/rnc-mode"))
 
 (package! org-alert)
+(package! svelte-mode)

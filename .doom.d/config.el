@@ -163,7 +163,7 @@
     (setq doom-modeline-lsp t)
     (setq doom-modeline-icon (display-graphic-p))))
 
-(after! vala-mode
+(after! (:and lsp-mode vala-mode)
   :when (eq system-type 'windows-nt)
   :config
   (setq lsp-clients-vala-ls-executable "C:\\msys64\\ucrt64\\bin\\vala-language-server.exe"))
@@ -171,7 +171,7 @@
 (use-package! meson-mode
   :hook (meson-mode . company-mode))
 
-(after! racer
+(after! (:and lsp-mode racer)
   :when (eq system-type 'windows-nt)
   :config
   (setq lsp-rust-server 'rls)
@@ -187,16 +187,31 @@
     (setq ediff-patch-program (concat msys-bin "/patch.exe")))
   (setq ediff-diff-options "-w"))
 
-(after! lsp-mode
-  (progn
-    (add-to-list 'lsp-language-id-configuration
-                 '(crystal-mode . "crystal"))
-    (lsp-register-client
-     (make-lsp-client :new-connection
-                      (lsp-stdio-connection '("crystalline"))
-                      :activation-fn (lsp-activate-on "crystal")
-                      :priority '1
-                      :server-id `crystalline))))
+(after! (:and eglot crystal-mode)
+  (add-to-list 'eglot-server-programs '(crystal-mode . ("crystalline")))
+  (add-hook 'crystal-mode 'eglot-ensure))
+
+(after! (:and eglot svelte-mode)
+  (add-to-list 'eglot-server-programs '(svelte-mode . ("svelteserver" "--stdio")))
+  (add-hook 'svelte-mode 'eglot-ensure))
+
+;; (after! lsp-mode
+;;   (progn
+;;     (add-to-list 'lsp-language-id-configuration
+;;                  '(crystal-mode . "crystal"))
+;;     (lsp-register-client
+;;      (make-lsp-client :new-connection
+;;                       (lsp-stdio-connection '("crystalline"))
+;;                       :activation-fn (lsp-activate-on "crystal")
+;;                       :priority '1
+;;                       :server-id `crystalline))
+;;     ;; (lsp-register-client
+;;     ;;  (make-lsp-client :new-connection
+;;     ;;                   (lsp-stdio-connection '("marko-language-server"))
+;;     ;;                   :activition-fn (lsp-activate-on "marko")
+;;     ;;                   :priority '1
+;;     ;;                   :server-id `marko-language-server))
+;;     ))
 
 (after! org-alert
   (add-hook 'org-agenda-mode-hook 'org-alert-enable))
