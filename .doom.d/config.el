@@ -141,18 +141,13 @@
 ;;               (delete (assoc "Japanese" uim-lang-code-alist)
 ;;                       uim-lang-code-alist))))
 
-(after! ddskk
-  (progn
-    (setq default-input-method "japanese-skk")
-    (map! :map global-map "C-x C-j" #'skk-mode)
-    (defun ddskk-anastasis-hooks ()
-      "ddskk"
-      (map! (:after org-mode :map org-mode-map
-             :i "C-j" nil)
-            (:after evil-org :map evil-org-mode-map
-             :i "C-j" nil)
-            (:i "C-j" #'skk-kakutei)))
-    (add-hook 'skk-mode-hook 'ddskk-anastasis-hooks)))
+(after! skk
+  (setq default-input-method "japanese-skk")
+  (map! "C-x C-j" #'skk-mode)
+  (add-hook! 'skk-mode-hook
+             (map! :map org-mode-map
+                   :i "C-j" #'skk-kakutei)
+             (map! :i "C-j" #'skk-kakutei)))
 
 (after! doom-modeline
   (progn
