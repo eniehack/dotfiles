@@ -189,7 +189,7 @@
   (add-to-list 'eglot-server-programs '(svelte-mode . ("svelteserver" "--stdio")))
   (add-hook 'svelte-mode 'eglot-ensure))
 
-;; (after! lsp-mode
+;; (after! (:and lsp-mode crystal-mode)
 ;;   (progn
 ;;     (add-to-list 'lsp-language-id-configuration
 ;;                  '(crystal-mode . "crystal"))
@@ -198,14 +198,16 @@
 ;;                       (lsp-stdio-connection '("crystalline"))
 ;;                       :activation-fn (lsp-activate-on "crystal")
 ;;                       :priority '1
-;;                       :server-id `crystalline))
-;;     ;; (lsp-register-client
-;;     ;;  (make-lsp-client :new-connection
-;;     ;;                   (lsp-stdio-connection '("marko-language-server"))
-;;     ;;                   :activition-fn (lsp-activate-on "marko")
-;;     ;;                   :priority '1
-;;     ;;                   :server-id `marko-language-server))
-;;     ))
+;;                       :server-id `crystalline))))
 
+;; (after! (:and lsp-mode svelte-mode)
+;;     (add-to-list 'lsp-language-id-configuration
+;;                  '(svelte-mode . "svelte"))
+;;     (lsp-register-client
+;;      (make-lsp-client :new-connection
+;;                       (lsp-stdio-connection '("svelteserver" "--stdio"))
+;;                       :activation-fn (lsp-activate-on "svelte")
+;;                       :priority '1
+;;                       :server-id 'svelteserver)))
 (after! org-alert
   (add-hook 'org-agenda-mode-hook 'org-alert-enable))
