@@ -201,7 +201,7 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 #exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 bar {
-    status_command i3blocks
+    status_command py3status -c ~/.config/py3status/config
     font pango:HackGenConsoleNF 15
     position top
     colors {
