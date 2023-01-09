@@ -144,10 +144,9 @@
 (after! skk
   (setq default-input-method "japanese-skk")
   (map! "C-x C-j" #'skk-mode)
-  (add-hook! 'skk-mode-hook
-             (map! :map org-mode-map
-                   :i "C-j" #'skk-kakutei)
-             (map! :i "C-j" #'skk-kakutei)))
+  (map! :map evil-org-mode-map
+        :after evil-org
+        :i "C-j" #'skk-kakutei))
 
 (after! doom-modeline
   (progn
