@@ -75,3 +75,4 @@
 
 (package! org-alert)
 (package! svelte-mode)
+(package! org-journal)

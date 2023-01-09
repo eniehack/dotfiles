@@ -213,4 +213,27 @@
 ;;                       :priority '1
 ;;                       :server-id 'svelteserver)))
 (after! org-alert
-  (add-hook 'org-agenda-mode-hook 'org-alert-enable))
+  (add-hook 'org-agenda-mode-hook 'org-alert-enable)
+  (setq alert-default-style 'libnotify))
+
+(after! org-journal
+  (setq org-journal-date-format "%Y-%m-%d")
+  (setq org-journal-time-format "%R\n\n")
+  (setq org-journal-file-format "journal-%Y-%m.org")
+  (setq org-journal-file-type 'weekly)
+  (setq org-journal-dir "~/orgmodes/")
+
+  (defun org-journal-find-location ()
+    ;; Open today's journal, but specify a non-nil prefix argument in order to
+    ;; inhibit inserting the heading; org-capture will insert the heading.
+    (org-journal-new-entry t)
+    (unless (eq org-journal-file-type 'daily)
+      (org-narrow-to-subtree))
+    (goto-char (point-max)))
+  (setq org-capture-templates (cons '("j" "Journal entry" plain (function org-journal-find-location)
+                                 "** %(format-time-string org-journal-time-format)%\n%i%?"
+                                 :jump-to-captured t :immediate-finish t)  org-capture-templates))
+  ;; (add-to-list org-capture-templates '(("j" "Journal entry" plain (function org-journal-find-location)
+  ;;                                "** %(format-time-string org-journal-time-format)%^{Title}\n%i%?"
+  ;;                                :jump-to-captured t :immediate-finish t)))
+  )
