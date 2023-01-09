@@ -78,20 +78,29 @@
 ;; they are implemented.
 
 (when (eq system-type 'windows-nt)
-  (let* ((msys2-root "c:/msys64")
-         (msys2-bin (concat msys2-root "/usr/bin"))
-         (msys2-ucrt-bin (concat msys2-root "/ucrt64/bin")))
+  (progn
+    (let* ((msys2-root "c:/msys64")
+           (msys2-bin (concat msys2-root "/usr/bin"))
+           (msys2-ucrt-bin (concat msys2-root "/ucrt64/bin")))
 
-    (setq exec-path (nconc exec-path `(msys2-bin msys2-ucrt-bin)))
-    (setenv "PATH"
-            (concat msys2-bin ";" msys2-ucrt-bin ";" (getenv "PATH"))))
-  (setq org-plantuml-jar-path
-        (expand-file-name (concat (getenv "HOME") "/scoop/apps/plantuml/1.2021.13/plantuml.jar")))
-  (set-clipboard-coding-system 'utf-16-le)
-  (set-default-coding-systems 'utf-8-unix)
-  (w32-set-system-coding-system 'utf-8-dos)
+      (setq exec-path (nconc exec-path `(msys2-bin msys2-ucrt-bin)))
+      (setenv "PATH"
+              (concat msys2-bin ";" msys2-ucrt-bin ";" (getenv "PATH")))
+      (after! ediff
+        :config
+        (let* ((msys-root "C:/msys64")
+               (msys-bin (concat msys-root "/usr/bin")))
+          (setq ediff-diff-program (concat msys-bin "/diff.exe"))
+          (setq ediff-diff3-program (concat msys-bin "/diff3.exe"))
+          (setq ediff-patch-program (concat msys-bin "/patch.exe")))
+        (setq ediff-diff-options "-w")))
+    (setq org-plantuml-jar-path
+          (expand-file-name (concat (getenv "HOME") "/scoop/apps/plantuml/1.2021.13/plantuml.jar")))
+    (set-clipboard-coding-system 'utf-16-le)
+    (set-default-coding-systems 'utf-8-unix)
+    (w32-set-system-coding-system 'utf-8-dos)
     (setq default-directory
-        (concat (getenv "HOME") "/")))
+          (concat (getenv "HOME") "/"))))
 
 ;; typenovel.el
 (defvar typenovel-command "npx tnc")
@@ -171,15 +180,9 @@
   (setq lsp-rust-server 'rls)
   (setq lsp-rust-rls-server-command "C:\\msys64\\ucrt64\\bin\\rls.exe"))
 
-(after! ediff
-  :when (eq system-type `windows-nt)
+(after! (:and eglot racer)
   :config
-  (let* ((msys-root "C:/msys64")
-         (msys-bin (concat msys-root "/usr/bin")))
-    (setq ediff-diff-program (concat msys-bin "/diff.exe"))
-    (setq ediff-diff3-program (concat msys-bin "/diff3.exe"))
-    (setq ediff-patch-program (concat msys-bin "/patch.exe")))
-  (setq ediff-diff-options "-w"))
+  (set-eglot-client! 'rust-mode `("rls")))
 
 (after! (:and eglot crystal-mode)
   (add-to-list 'eglot-server-programs '(crystal-mode . ("crystalline")))
