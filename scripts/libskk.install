@@ -4,7 +4,7 @@ SRC_DIR="`script_dir`/.config/libskk"
 install() {
 	mkdir -p "${DEST_DIR}/rules/my-azik"
 	ln -s "${SRC_DIR}/rules/my-azik/rom-kana" "${DEST_DIR}/rules/my-azik/rom-kana"
-	ln -s "${SRC_DIR}/rules/my-azik/keymaps" "${DEST_DIR}/rules/my-azik/keymaps"
+	ln -s "${SRC_DIR}/rules/my-azik/keymap" "${DEST_DIR}/rules/my-azik/keymap"
 	ln -s "${SRC_DIR}/rules/my-azik/metadata.json" "${DEST_DIR}/rules/my-azik/metadata.json"
 }
 
