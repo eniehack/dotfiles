@@ -1,0 +1,12 @@
+DEST_DIR="${HOME}"
+SRC_DIR="`script_dir`"
+
+install() {
+	ln -s "${SRC_DIR}/.xinitrc" "${DEST_DIR}/.xinitrc"
+	ln -s "${SRC_DIR}/.Xresources" "${DEST_DIR}/.Xresources"
+}
+
+uninstall() {
+	unlink "${DEST_DIR}/.xinitrc"
+	unlink "${DEST_DIR}/.Xresources"
+}
