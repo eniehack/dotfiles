@@ -44,4 +44,8 @@ export PATH="$PNPM_HOME:$PATH"
 #else
 #    eval $(gpg-agent --daemon --write-env-file "$HOME/.gpg-agent-info")
 #fi
+unset SSH_AGENT_PID
+if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+  export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+fi
 source /usr/share/nvm/init-nvm.sh
