@@ -6,8 +6,8 @@ export XMODIFIERS="@im=fcitx"
 
 autocutsel -selection PRIMARY -fork &
 autocutsel -fork &
+/usr/bin/urxvtd -q -o -f
 
-urxvtd -q -o -f &
-xrdb .Xresources &
+[[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
 
 exec tdm --xstart
