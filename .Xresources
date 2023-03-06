@@ -16,7 +16,7 @@
 *.color14:    #9AEDFE
 *.color7:     #BFBFBF
 *.color15:    #E6E6E6
-URxvt.font: -misc-hackgen35 console nfj-bold-r-normal--0-0-0-0-p-0-ascii-0:size=16
+URxvt*font: xft:HackGen Console NF:size=16:style=Regular:antialias=true
 URxvt.secondaryScreen: 1
 URxvt.secondaryScroll: 1
 URxvt.scrollBar: false
