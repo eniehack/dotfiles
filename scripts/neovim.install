@@ -1,19 +1,16 @@
 DEST_DIR="${XDG_CONFIG_HOME}/nvim"
 SRC_DIR="`script_dir`/.config/nvim"
-DEIN_DEST_DIR="${HOME}"
 
 install() {
 	mkdir -p "${DEST_DIR}"
 	ln -s "${SRC_DIR}/init.vim" "${DEST_DIR}/"
 	ln -s "${SRC_DIR}/sonictemplate" "${DEST_DIR}"
-	ln -s "`script_dir`/dein.toml" "${DEIN_DEST_DIR}"
-	ln -s "`script_dir`/dein_lazy.toml" "${DEIN_DEST_DIR}"
+	ln -s "${SRC_DIR}/lua" "${DEST_DIR}"
 }
 
 uninstall() {
 	rm "${DEST_DIR}/init.vim"
 	rm -r "${DEST_DIR}/sonictemplate"
-	rm "${DEIN_DEST_DIR}/dein.toml"
-	rm "${DEIN_DEST_DIR}/dein_lazy.toml"
+	rm -s "${DEST_DIR}/lua"
 	rmdir "${DEST_DIR}"
 }
