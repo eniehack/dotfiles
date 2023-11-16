@@ -33,7 +33,7 @@ return {
     },
     {
         'nvim-lualine/lualine.nvim',
-        event = "BufReadPre",
+        event = "BufEnter",
         lazy = true,
         dependencies = {
             'nvim-tree/nvim-web-devicons',
